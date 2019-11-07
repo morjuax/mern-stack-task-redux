@@ -10,7 +10,7 @@ const TaskForm = ({form, handleInput, addTask}) => (
             <div className="input-field col s12">
                 <input name="title" type="text" placeholder='Task Title'
                        onChange={handleInput}
-                    // value={form.title}
+                        value={form.title}
                 />
             </div>
         </div>
@@ -19,7 +19,7 @@ const TaskForm = ({form, handleInput, addTask}) => (
                                                 <textarea name="description" className="materialize-textarea"
                                                           placeholder='Task Description'
                                                           onChange={handleInput}
-                                                    // value={form.description}
+                                                     value={form.description}
                                                 ></textarea>
             </div>
         </div>

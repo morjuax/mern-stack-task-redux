@@ -5,7 +5,12 @@ const Task = require('../models/tasks');
 
 router.get('/', async (req, res) => {
     let tasks = await Task.find();
-    res.json(tasks);
+    // res.json(tasks);
+    res.json({
+        status: 1,
+        message: 'Task list sucess!',
+        data: tasks,
+    })
 });
 
 router.get('/:id', async (req, res) => {

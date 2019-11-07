@@ -7,11 +7,28 @@ let defaultState = {
         description: '',
         _id: ''
     },
+    tasks: [],
     loading: false
 };
 
 const mainReducer = (state = defaultState, action) => {
-    console.log(action.type);
+
+    if (action.type === "REQUEST_LIST_LOAD") {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    if (action.type === "REQUEST_LOAD_LIST_SUCCESS") {
+        // console.log("reducer: ", action.tasks);
+        return {
+            ...state,
+            loading: false,
+            tasks: action.tasks
+        }
+    }
+
     if (action.type === "HANDLE_INPUT") {
         let {value, name} = action.e.target;
         return {
@@ -24,16 +41,23 @@ const mainReducer = (state = defaultState, action) => {
     }
     if (action.type === "REQUEST_LOAD") {
         action.e.preventDefault();
-        state.loading = true;
-        //console.log("form from action: ", action.form);
+        return {
+            ...state,
+            loading: true
+        }
     }
 
     if (action.type === "REQUEST_LOAD_SUCCESS") {
-        state.loading = false;
-        //action.e.preventDefault();
-        //console.log("agregar de vuelta ", state.form);
-        // let response = await axios.post('/api/tasks', state.form);
         M.toast({html: action.data.message});
+        return {
+            ...state,
+            loading: false,
+            form: {
+                title: '',
+                description: '',
+                _id: ''
+            }
+        };
     }
     return state;
 };
