@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {fetchTasks} from '../actions'
+import {fetchTasks, deleteTask, editTask} from '../actions'
 
-const TaskList = ({tasks, fetchTasks}) => {
+const TaskList = ({tasks, fetchTasks, deleteTask, editTask}) => {
 
     useEffect(() => {
         fetchTasks(); //equivalent to componentDidMount
@@ -27,12 +27,12 @@ const TaskList = ({tasks, fetchTasks}) => {
                             <td>{task.description}</td>
                             <td>
                                 <button
-                                    //onClick={() => this.editTask(task._id)}
+                                    onClick={() => editTask(task._id)}
                                     className="btn light-blue darken-4">
                                     <i className="material-icons">edit</i>
                                 </button>
                                 <button
-                                    //onClick={() => this.deleteTask(task._id)}
+                                    onClick={() => deleteTask(task._id)}
                                     className="btn light-blue darken-4" style={{margin: '4px'}}>
                                     <i className="material-icons">delete</i>
                                 </button>
@@ -50,7 +50,7 @@ const mapStateToProps = state => ({
     tasks: state.tasks
 });
 
-const mapDispatchToProps = {fetchTasks};
+const mapDispatchToProps = {fetchTasks, deleteTask, editTask};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

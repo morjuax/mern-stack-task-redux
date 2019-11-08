@@ -16,7 +16,11 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     let {id} = req.params;
     let task = await Task.findById(id);
-    res.json(task);
+    res.json({
+        status: 1,
+        message: 'Task fetch success!',
+        data: task,
+    });
 });
 
 router.post('/', async (req, res) => {
